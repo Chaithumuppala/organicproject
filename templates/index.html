@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block bodyform %}
+
+    <br>
+    <form action="/auth/signup/" method="post" style=" background-color: lightgray;width: 350px ; padding: 30px ; display: block;margin: 0 auto ; border-radius: 40px">
+    {% csrf_token %}
+    <label for="email" style="font-size: 20px" class="text-dark">Email</label>
+    <div class="form-group" >
+    <input type="email" class="form-control" id="email" style="width: 300px ; display: block ; margin: 0 auto ; background-color: transparent ; border: 1.5px solid black ; color: white" name="email"  required>
+    </div>
+    <label for="pass1" style="font-size: 20px" class="text-dark">Password</label>
+    <div class="form-group">
+        <input type="password" class="form-control" id="pass1" name="pass1" style="width: 300px ; display: block ; margin: 0 auto ; background-color: transparent ; border: 1.5px solid black; color: white;" required>
+    </div>
+    <label for="pass2" style="font-size: 20px" class="text-dark">Confirm Password</label>
+    <div class="form-group">
+        <input type="password" class="form-control" id="pass2" name="pass2" style="width: 300px ; display: block ; margin: 0 auto ; background-color: transparent ; border: 1.5px solid black; color: white;" required>
+    </div>
+    <br>
+
+    <button type="submit" class="btn bg-danger p-1.5">Signin</button>
+
+            <br>
+        <br>
+
+        <span style="color: black"> Already User? </span> <a href="/auth/login/">Login</a>
+
+    </form>
+{% endblock bodyform %}
+
