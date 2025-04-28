@@ -1,11 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1 class="main">Welcome to Login</h1>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}
+    login
+{% endblock title %}
+
+{% block content %}
+{% endblock content %}
+
+{% block bodyform %}
+    <br>
+
+    <form action="/auth/login/" method="post"
+          style="background-color: lightgray; width: 350px; padding: 30px; display: block; margin: 0 auto; border-radius: 40px; position: relative;">
+        {% csrf_token %}
+
+        <!-- Display error messages inside the form -->
+        {% if messages %}
+            <div id="message-container" style="text-align: center; margin-bottom: 10px;">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" id="notification-{{ forloop.counter }}"
+                         style="font-size: 14px; padding: 5px; background-color: #f8d7da; color: #721c24; border-radius: 10px; display: inline-block; margin: 5px;">
+                        {{ message }}
+                        <button type="button" style="border: none; background: transparent; color: black; font-weight: bold; margin-left: 10px;"
+                                onclick="minimizeNotification('notification-{{ forloop.counter }}')">×</button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <label for="email" style="font-size: 20px" class="text-black">Email</label>
+        <div class="form-group">
+            <input type="email" class="form-control" id="email" name="email"
+                   style="width: 300px; display: block; margin: 0 auto; background-color: transparent; border: 1.5px solid black; color: black !important;"
+                   required>
+        </div>
+
+        <label for="pass1" style="font-size: 20px" class="text-dark">Password</label>
+        <div class="form-group">
+            <input type="password" class="form-control" id="pass1" name="pass1"
+                   style="width: 300px; display: block; margin: 0 auto; background-color: transparent; border: 1.5px solid black; color: black !important;"
+                   required>
+        </div>
+
+        
+        <div class="form-group">
+
+        </div>
+        <br>
+
+        <button type="submit" class="btn bg-danger p-1.5">login</button>
+
+        <br><br>
+
+        <span style="color: black">New User? </span> <a href="/auth/signup/">Sign up</a>
+
+    </form>
+
+    <script>
+        // Auto-hide each notification after 5 seconds
+        setTimeout(function() {
+            let notifications = document.querySelectorAll("[id^='notification-']");
+            notifications.forEach(notification => {
+                notification.style.display = "none";
+            });
+        }, 5000);
+
+        // Function to minimize a specific notification
+        function minimizeNotification(notificationId) {
+            let notification = document.getElementById(notificationId);
+            if (notification) {
+                notification.style.display = "none";
+            }
+        }
+    </script>
+
+{% endblock bodyform %}

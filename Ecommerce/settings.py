@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'Ecommerce.urls'
@@ -115,6 +116,21 @@ USE_I18N = True
 USE_TZ = True
 
 
+#sending emails
+
+import os
+import certifi
+
+os.environ['SSL_CERT_FILE'] = certifi.where()
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'chaithanya.muppala5@gmail.com'
+EMAIL_HOST_PASSWORD = 'Mupp@1997'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 import os
@@ -128,4 +144,12 @@ STATICFILES_DIRS = [
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
+from django.contrib import messages
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    messages.WARNING: 'danger',
+    messages.INFO: 'danger',
+    messages.SUCCESS: 'success',
+}
